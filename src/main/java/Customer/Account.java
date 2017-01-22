@@ -1,5 +1,7 @@
 package customer;
 
+import builling.BankAccount;
+import builling.BankAccountManager;
 import ordering.Order;
 import product.LineProduct;
 
@@ -16,6 +18,7 @@ public class Account {
     private int id;
     private Customer owner;
     private String userName, password;
+    private BankAccount bankAccount;
 
     private List<Order> history;
 
@@ -46,5 +49,22 @@ public class Account {
 
     public List<Order> getHistory() {
         return history;
+    }
+
+    public void setBankAccount(int bankAccountNumber, int secretCode) {
+        BankAccountManager bankAccountManager = BankAccountManager.getInstance();
+        this.bankAccount = bankAccountManager.findBankAccount(bankAccountNumber, secretCode);
+    }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public String getFistNameCustomer (){
+        return owner.getFirstName();
+    }
+
+    public String getSecondNameCustomer (){
+        return owner.getSecondName();
     }
 }

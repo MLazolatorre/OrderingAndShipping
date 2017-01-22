@@ -8,7 +8,7 @@ public class LineProduct {
     private int quantity;
     private Product product;
 
-    LineProduct(int quantity, Product product) {
+    public LineProduct(int quantity, Product product) {
         this.quantity = quantity;
         this.product = product;
     }

@@ -5,6 +5,7 @@ package ordering;
  */
 public enum OrderStatus {
     New(),
+    StockChecked(),
     Builling(),
     Shipping(),
     Closed;
