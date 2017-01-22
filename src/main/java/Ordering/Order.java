@@ -38,7 +38,7 @@ public class Order {
         for (LineProduct lineProduct : products){
             Product product = lineProduct.getProduct();
             int quantity = lineProduct.getQuantity();
-            int priceProduct = product.getPrice();
+            double priceProduct = product.getPrice();
 
             totalPrice += quantity * priceProduct;
         }
