@@ -24,4 +24,16 @@ public class LineProduct {
     public void takeFromStock (int quantity){
         this.quantity -= quantity;
     }
+
+    public void addOne (){
+        quantity ++;
+    }
+
+    public boolean subOne(){
+        quantity --;
+        if (quantity == 0){
+            return false;
+        }
+        return true;
+    }
 }

@@ -1,5 +1,7 @@
 package builling;
 
+import GUI.AlertBox;
+
 /**
  * Created by MARC LAZOLA TORRE on 22/01/2017.
  */
@@ -21,7 +23,7 @@ public class BankAccount {
 
     public boolean dropMoney (double money){
         if (money > this.money) {
-            System.out.println("BankAccount : You don't have enough money to pay");
+            AlertBox.display("Bank Alert","You don't have enough money in you bank account to pay! ");
             return false;
         }
         this.money -= money;

@@ -106,4 +106,23 @@ public class Order {
             this.account = account;
         }
     }
+
+    public void addAProduct (Product p){
+        for (LineProduct lineProduct : products){
+            if (lineProduct.getProduct().equals(p)){
+                lineProduct.addOne();
+            }
+        }
+        products.add(new LineProduct(1, p));
+    }
+
+    public void subbAProduct (Product p){
+        for (LineProduct lineProduct : products){
+            if (lineProduct.getProduct().equals(p)){
+                if (!lineProduct.subOne()){
+                    products.remove(lineProduct);
+                }
+            }
+        }
+    }
 }

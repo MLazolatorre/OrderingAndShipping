@@ -1,5 +1,6 @@
 package shipping;
 
+import GUI.AlertBox;
 import customer.Account;
 import ordering.Order;
 
@@ -14,5 +15,7 @@ public class ShippingOffice {
         String secondNameOfTheClient = account.getSecondNameCustomer();
         System.out.println("The order have been sent to " + firstNameOfTheClient + " " + secondNameOfTheClient +
                                 " to " + account.getOrderingAddress());
+        AlertBox.display("Succeed commend", "Your commend have been sent to " + firstNameOfTheClient + " " + secondNameOfTheClient + " at the following address\n" +
+                                account.getOrderingAddress());
     }
 }

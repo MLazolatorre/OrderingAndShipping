@@ -1,5 +1,7 @@
 package builling;
 
+import GUI.AlertBox;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +42,7 @@ public class BankAccountManager {
                 return account;
             }
         }
+        AlertBox.display("Bank message", "This account doesn't exist ...");
         return null;
     }
 }
