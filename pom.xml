@@ -7,8 +7,8 @@
     <groupId>lazoCaronChebbi</groupId>
     <artifactId>OrderingAndShipping</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
 
+    <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
