@@ -45,13 +45,28 @@ public class Order {
     }
 
     public boolean makeTheOrder (){
+        Stock stock = Stock.getInstance();
         for (LineProduct lineProduct : products){
-            if (!Stock.checkProductInStock(lineProduct))
+            if (!stock.checkProductInStock(lineProduct))
                 return false;
         }
-        Stock.takeProductsInStock(products);
+        stock.takeProductsInStock(products);
         return true;
     }
 
+    public void statusChanged(OrderStatus status) {
+        this.status = status;
+    }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
 }

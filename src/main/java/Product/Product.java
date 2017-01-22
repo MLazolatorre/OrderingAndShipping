@@ -4,7 +4,9 @@ package product;
  * Created by MARC LAZOLA TORRE on 21/01/2017.
  */
 public enum Product {
-    CARROT ("Carrot", "", 20, 1.25);
+    CARROT ("Carrot", "", 20, 1.25),
+    TOMATO ("Tomato", "", 10, 2.00),
+    POTATO ("Potato", "", 30, 3.10);
 
     private final String name;
     private final String image;
@@ -27,5 +29,13 @@ public enum Product {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

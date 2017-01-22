@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Stock {
 
-    private static List<LineProduct> products;
+    private List<LineProduct> products;
 
     private static Stock ourInstance;
 
@@ -26,7 +26,7 @@ public class Stock {
         }
     }
 
-    public static void takeProductsInStock (List<LineProduct> commend){
+    public void takeProductsInStock (List<LineProduct> commend){
         for (LineProduct LineProductCommended : commend){
 
             Product productCommended = LineProductCommended.getProduct();
@@ -42,7 +42,7 @@ public class Stock {
         }
     }
 
-    public static boolean checkProductInStock (LineProduct commend){
+    public boolean checkProductInStock (LineProduct commend){
         Product productCommended = commend.getProduct();
         int quantityCommended = commend.getQuantity();
 
@@ -54,6 +54,15 @@ public class Stock {
                 return quantityCommended <= quantityInStock;
         }
         return false;
+    }
+
+    public int getQuantityInStock (Product product){
+        for (LineProduct lineProduct : products){
+            if (lineProduct.getProduct().equals(product)){
+                return lineProduct.getQuantity();
+            }
+        }
+        return 0;
     }
 
 }
