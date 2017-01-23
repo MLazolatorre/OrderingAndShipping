@@ -24,11 +24,13 @@ public class AccountManager {
         return ourInstance;
     }
 
-    public void createAccount (String address, int phone, String firstName, String secondName, String userName, String password){
+    public Account createAccount (String address, int phone, String firstName, String secondName, String userName, String password){
         Customer owner = new Customer(address,phone,firstName, secondName);
         Account account = new Account(owner, userName, password);
 
         accounts.add(account);
+
+        return account;
     }
 
 

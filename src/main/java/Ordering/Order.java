@@ -1,5 +1,6 @@
 package ordering;
 
+import GUI.AlertBox;
 import builling.BankAccountManager;
 import customer.Account;
 import product.LineProduct;
@@ -25,6 +26,16 @@ public class Order {
     private double totalPrice;
 
     private Account account;
+
+    public Order(){
+        idCounter++;
+        id = idCounter;
+
+        date = new Date();
+        status = OrderStatus.New;
+        products = new ArrayList<LineProduct>();
+        totalPrice = 0;
+    }
 
     public Order(List<LineProduct> commend) {
         idCounter++;
@@ -85,6 +96,32 @@ public class Order {
         return true;
     }
 
+    public boolean checkTheStock (){
+        Stock stock = Stock.getInstance();
+
+        for (LineProduct lineProduct : products) {
+            if (!stock.checkProductInStock(lineProduct)) {
+                AlertBox.display("Sock default", "We don't have enough " + lineProduct.getProduct().getName());
+                return false;
+            }
+        }
+        stock.takeProductsInStock(products);
+        statusChanged(OrderStatus.StockChecked);
+        return true;
+    }
+
+    public boolean checkBankAccountAndSent(){
+        BankAccountManager bankAccountManager = BankAccountManager.getInstance();
+
+        if (!bankAccountManager.dropMoneyFromAccount(account.getBankAccount(), totalPrice))
+            return false;
+        statusChanged(OrderStatus.Builling);
+
+        ShippingOffice.sendTheOrder(this);
+
+        return true;
+    }
+
     public void statusChanged(OrderStatus status) {
         this.status = status;
     }
@@ -94,6 +131,10 @@ public class Order {
     }
 
     public double getTotalPrice() {
+        totalPrice = 0;
+        for (LineProduct lineProduct : products){
+            totalPrice += lineProduct.getQuantity()*lineProduct.getProduct().getPrice();
+        }
         return totalPrice;
     }
 
@@ -107,22 +148,37 @@ public class Order {
         }
     }
 
-    public void addAProduct (Product p){
+    public boolean addAProduct (Product p){
         for (LineProduct lineProduct : products){
             if (lineProduct.getProduct().equals(p)){
                 lineProduct.addOne();
+                return false;
             }
         }
+        System.out.println("New");
         products.add(new LineProduct(1, p));
+        return true;
     }
 
-    public void subbAProduct (Product p){
+    public void subAProduct(Product p){
         for (LineProduct lineProduct : products){
             if (lineProduct.getProduct().equals(p)){
                 if (!lineProduct.subOne()){
                     products.remove(lineProduct);
+                    return;
                 }
             }
         }
+    }
+
+    public List<LineProduct> getProducts() {
+        return products;
+    }
+
+    public void showProduct (){
+        for (LineProduct product : products){
+            System.out.println(product.getProduct().getName() + " x" + product.getQuantity());
+        }
+        System.out.println();
     }
 }
